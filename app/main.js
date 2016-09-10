@@ -1,4 +1,6 @@
-import {Game} from './game.js';
+import {Game} from './Game.js';
+import {Boot} from './states/Boot.js';
 
-
-window.game = new Game();
+var game = new Game(800, 600);
+game.state.add('Boot', Boot);
+game.state.start('Boot');
