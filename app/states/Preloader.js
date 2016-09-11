@@ -8,13 +8,7 @@ class Preloader extends Phaser.State  {
 		this.preloadBar = this.add.sprite(400, 100, 'preloaderBar');
         this.load.image('playButton', 'assets/images/play_button.png');
         this.load.image('fullScreenButton', 'assets/images/fullscreen.jpg');
-        this.style = {
-                      font: "bold 32px Arial",
-                      fill: "#fff",
-                      boundsAlignH: "center",
-                      boundsAlignV: "middle"
-                     };
-		this.text = this.add.text(350, 100, "Loading...", this.style);
+		this.text = this.add.text(350, 100, "Loading...", this.headerStyle);
 	    this.load.setPreloadSprite(this.preloadBar);
     }
 

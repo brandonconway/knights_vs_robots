@@ -4,7 +4,7 @@ import {Preloader} from "./Preloader.js"
 class Boot extends Phaser.State {
 
      init () {
-         this.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+         this.scale.fullScreenScaleMode = Phaser.ScaleManager.RESIZE;
          if (!this.game.device.desktop) {
              var width = window.innerWidth * window.devicePixelRatio;
              var height = window.innerHeight * window.devicePixelRatio;
@@ -15,7 +15,7 @@ class Boot extends Phaser.State {
      }
 
      preload () {
-         this.load.image('preloaderBackground', 'assets/images/starsky.jpeg');
+         this.load.image('preloaderBackground', 'assets/images/loading.jpeg');
          this.load.image('preloaderBar', 'assets/images/preloader_bar.png');
      }
 
