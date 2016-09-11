@@ -1,3 +1,11 @@
+body {
+    background-color: #679fd0;
+}
+
+#game-container canvas{
+    margin: auto;
+}
+
 h1.title {
   text-align: center;
 }

@@ -4,6 +4,8 @@ import {Main} from "./Main.js"
 class LevelMenu extends Phaser.State {
 
 	create() {
+        this.game.addFullScreenButton();
+
         var style, text, playButton;
         style = {
                   font: "bold 32px Arial",
@@ -17,7 +19,7 @@ class LevelMenu extends Phaser.State {
                             ).anchor.set(0.5);
         playButton = this.add.button(
                                      this.game.width/2,
-                                     text.y+200, 'playButton',
+                                     text.y+300, 'playButton',
                                      this.startGame, this
                                     ).anchor.set(0.5);
         this.state.add('Main', Main);

@@ -2,16 +2,30 @@
 
 class Game extends Phaser.Game {
 
-    constructor (width=1024, height=764) {
-        super(width, height, Phaser.AUTO, 'content', null);
+    constructor (width=1024, height=764, renderer, el) {
+        super(width, height, Phaser.AUTO, el, null);
+
     }
 
-    init () {}
-    
-    create () {
-        this.game.physics.startSystem(Phaser.Physics.ARCADE);
-        this.game.stage.backgroundColor = '#6DCFF6';
+    addFullScreenButton () {
+        var game, button;
+        game = this;
+        button = this.add.button(this.width-20,
+                                 20,
+                                 'fullScreenButton',
+                                 this.enterFullScreen, this
+                             );
+        button.anchor.set(0.5);
+        this.scale.onFullScreenChange.add(function() {
+            button.visible = !game.scale.isFullScreen;
+        });
     }
+
+    enterFullScreen (button) {
+        this.scale.startFullScreen(false);
+        this.scale.refresh();
+    }
+
 }
 
 export {

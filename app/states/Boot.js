@@ -1,19 +1,25 @@
 import {Preloader} from "./Preloader.js"
 
-var Boot = function (game) {};
 
-Boot.prototype = {
+class Boot extends Phaser.State {
 
-     init: function () {
-         this.scale.pageAlignHorizontally = true;
-     },
+     init () {
+         this.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+         if (!this.game.device.desktop) {
+             var width = window.innerWidth * window.devicePixelRatio;
+             var height = window.innerHeight * window.devicePixelRatio;
+             this.scale.setMinMax(width, height, width, height);
+             this.scale.scaleMode = Phaser.ScaleManager.RESIZE;
+             this.scale.fullScreenScaleMode = Phaser.ScaleManager.RESIZE;
+         }
+     }
 
-     preload: function () {
+     preload () {
          this.load.image('preloaderBackground', 'assets/images/starsky.jpeg');
          this.load.image('preloaderBar', 'assets/images/preloader_bar.png');
-     },
+     }
 
-     create: function () {
+     create () {
          this.state.add('Preloader', Preloader);
          this.state.start('Preloader');
      }
