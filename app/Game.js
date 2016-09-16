@@ -20,7 +20,7 @@ class Game extends Phaser.Game {
 
     getPointsFromPointObjects (point_objects) {
         // args: point objects from tilemap
-        // returns: two arrays of points (or an array of objects with x,y coords?)
+        // returns: an array of objects with x,y coords
     }
 
     generatePathFromPoints (points) {
@@ -36,12 +36,12 @@ class Game extends Phaser.Game {
         for (var i = 0; i <= 1; i += x) {
             var px = this.math.catmullRomInterpolation(points.x, i);
             var py = this.math.catmullRomInterpolation(points.y, i);
-            this.bmd.rect(px, py, 1, 1, 'rgba(255, 255, 255, 1)');
+            //this.bmd.rect(px, py, 1, 1, 'rgba(255, 255, 255, 1)');
             path.push( { x: px, y: py });
         }
 
         for (var p = 0; p < points.x.length; p++) {
-            this.bmd.rect(points.x[p]-3, points.y[p]-3, 6, 6, 'rgba(255, 0, 0, 1)');
+            //this.bmd.rect(points.x[p]-3, points.y[p]-3, 6, 6, 'rgba(255, 0, 0, 1)');
         }
 
         return path;
@@ -63,7 +63,7 @@ class Game extends Phaser.Game {
     }
 
     addFullScreenButton () {
-        var game, button;
+        var game;
         game = this;
         this.fullButton = this.add.button(this.width-20, 20,
                                  'fullScreenButton',
@@ -78,7 +78,25 @@ class Game extends Phaser.Game {
     enterFullScreen (button) {
         this.scale.startFullScreen(false);
         this.scale.refresh();
+    }
 
+    pauseGame (button) {
+        this.game.paused = true;
+        this.input.onDown.add(this.game.unPauseGame, this);
+        this.unPauseButton = this.game.add.button(this.width/2, this.height/2,
+                        'playButton', this.unPauseGame, this);
+    }
+
+    unPauseGame (button) {
+        if (this.game.paused) {
+            var clicked_unpause = this.unPauseButton.getBounds()
+                .contains(this.game.input.x, this.game.input.y)
+
+            if (clicked_unpause) {
+                this.game.paused = false;
+            }
+            this.unPauseButton.destroy();
+        }
     }
 
 }
